@@ -1,4 +1,4 @@
-from rest_framework import generics, permissions, status
+from rest_framework import generics, viewsets, permissions, status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.exceptions import PermissionDenied
@@ -45,20 +45,7 @@ class ExecutorListView(generics.ListAPIView):
     serializer_class = ExecutorSerializer
 
 
-# Customer Views
-class CustomerRetrieveView(generics.RetrieveAPIView):
+# Customer View
+class CustomerViewSet(viewsets.ModelViewSet):
     queryset = Customer.objects.all()
     serializer_class = CustomerSerializer
-
-class CustomerUpdateView(generics.UpdateAPIView):
-    queryset = Customer.objects.all()
-    serializer_class = CreateCustomerSerializer
-    permissions_class = permissions.IsAuthenticatedOrReadOnly
-
-class CustomerCreateView(generics.CreateAPIView):
-    queryset = Customer.objects.all()
-    serializer_class = CreateCustomerSerializer
-
-class CustomerListView(generics.ListAPIView):
-    queryset = Customer.objects.all()
-    serializer_class = CustomerSerializer        
