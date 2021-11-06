@@ -21,8 +21,10 @@ class LogOut(APIView):
 class ExecutorViewSet(viewsets.ModelViewSet):
     queryset = Executor.objects.all()
     serializer_class = ExecutorSerializer
+    permission_classes = [permissions.IsAdminUser]
 
 # Customer View
 class CustomerViewSet(viewsets.ModelViewSet):
     queryset = Customer.objects.all()
     serializer_class = CustomerSerializer
+    permission_classes = [permissions.IsAdminUser]
