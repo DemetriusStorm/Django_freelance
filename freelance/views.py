@@ -1,7 +1,6 @@
-from rest_framework import generics, viewsets, permissions, status
+from rest_framework import viewsets, permissions, status
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.exceptions import PermissionDenied
 
 from .models import *
 from .serializer import *
@@ -19,31 +18,9 @@ class LogOut(APIView):
 
 
 # Executor Views
-class ExecutorRetrieveView(generics.RetrieveAPIView):
+class ExecutorViewSet(viewsets.ModelViewSet):
     queryset = Executor.objects.all()
     serializer_class = ExecutorSerializer
-
-class ExecutorUpdateView(generics.UpdateAPIView):
-    # queryset = Executor.objects.all()
-    serializer_class = CreateExecutorSerializer
-    permission_classes = (IsExecutor,)
-
-    def get_queryset(self):
-        user = self.request.user
-
-        if user.is_authenticated:
-            return Executor.objects.filter(user=user)
-
-        raise PermissionDenied()
-
-class ExecutorCreateView(generics.CreateAPIView):
-    queryset = Executor.objects.all()
-    serializer_class = CreateExecutorSerializer
-
-class ExecutorListView(generics.ListAPIView):
-    queryset = Executor.objects.all()
-    serializer_class = ExecutorSerializer
-
 
 # Customer View
 class CustomerViewSet(viewsets.ModelViewSet):
