@@ -1,0 +1,233 @@
+openapi: 3.0.2
+info:
+  title: Django Freelance
+  version: 1.0.0
+  description: Description about Django Freelance API
+components:
+  schemas:
+    Executor:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        user:
+          type: object
+          properties:
+            username:
+              type: string
+              description: Required.
+              maxLength: 150
+            email:
+              type: string
+              format: email
+              maxLength: 254
+            first_name:
+              type: string
+              maxLength: 150
+            last_name:
+              type: string
+              maxLength: 150
+          required:
+          - username
+        phone:
+          type: string
+          maxLength: 11
+      required:
+      - user
+      - phone
+    Customer:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        user:
+          type: object
+          properties:
+            username:
+              type: string
+              description: Required.
+              maxLength: 150
+            email:
+              type: string
+              format: email
+              maxLength: 254
+            first_name:
+              type: string
+              maxLength: 150
+            last_name:
+              type: string
+              maxLength: 150
+          required:
+          - username
+        phone:
+          type: string
+          maxLength: 11
+      required:
+      - user
+      - phone
+    TokenObtainPair:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+          writeOnly: true
+      required:
+      - username
+      - password      
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      name: Authorization
+      in: header  
+paths:
+  /api/executors/:
+    get:
+      operationId: listExecutors
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Executor'
+          description: ''
+      tags:
+      - api
+      security:
+      - ApiKeyAuth: []
+    post:
+      operationId: createExecutor
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Executor'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Executor'
+          description: ''
+      tags:
+      - api
+      security:
+      - ApiKeyAuth: []
+  /api/executors/{id}:
+    get:
+      operationId: retrieveExecutor
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this executor.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Executor'
+          description: ''
+      tags:
+      - api
+      security:
+      - ApiKeyAuth: []
+    put:
+      operationId: updateExecutor
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this executor.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Executor'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Executor'
+          description: ''
+      tags:
+      - api
+      security:
+      - ApiKeyAuth: []
+  /api/customers/:
+    get:
+      operationId: listCustomers
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Customer'
+          description: ''
+      tags:
+      - api
+      security:
+      - ApiKeyAuth: []
+  /api/customers/{id}:
+    get:
+      operationId: retrieveCustomer
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this customer.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+          description: ''
+      tags:
+      - api
+      security:
+      - ApiKeyAuth: []
+  /api/token/:
+    post:
+      operationId: createTokenObtainPair
+      description: 'Takes a set of user credentials and returns an access and refresh JSON web 1token pair to prove the authentication of those credentials.'
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenObtainPair'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenObtainPair'
+          description: ''
+      tags:
+      - api
+      security:
+      - ApiKeyAuth: []
