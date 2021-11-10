@@ -38,3 +38,65 @@ class CreateCustomerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Customer
         fields = '__all__'
+
+
+class ServiceSerializer(serializers.ModelSerializer):
+    executor = ExecutorSerializer()
+    service_type = serializers.CharField(source='get_service_type_display')
+    
+    class Meta:
+        model = Service
+        fields = '__all__'
+
+
+class CreateServiceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Service
+        fields = '__all__'
+
+
+class OrderSerializer(serializers.ModelSerializer):
+    customer = CustomerSerializer()
+    order_type = serializers.CharField(source='get_order_type_display')
+    
+    class Meta:
+        model = Order
+        fields = '__all__'
+
+
+class CreateOrderSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Order
+        fields = '__all__'
+
+
+class OrderingSerializer(serializers.ModelSerializer):
+    service = ServiceSerializer()
+    order = OrderSerializer()
+    customer = CustomerSerializer()
+    executor = ExecutorSerializer()
+    
+    class Meta:
+        model = Ordering
+        fields = '__all__'
+
+
+class CreateOrderingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Ordering
+        fields = '__all__'
+
+
+class MessageSerializer(serializers.ModelSerializer):
+    customer = CustomerSerializer()
+    executor = ExecutorSerializer()
+    
+    class Meta:
+        model = Message
+        fields = '__all__'
+
+
+class CreateMessageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Message
+        fields = '__all__'
