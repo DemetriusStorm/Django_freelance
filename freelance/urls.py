@@ -23,16 +23,16 @@ order_list = OrderViewSet.as_view({
     'post': 'create',
     })
 order_detail = OrderViewSet.as_view({'get': 'retrieve'})
-service_list = ServiceViewSet.as_view({
-    'get': 'list',
-    'post': 'create',    
-})
-service_detail = ServiceViewSet.as_view({'get': 'retrieve'})
-ordering_list = OrderingViewSet.as_view({
-    'get': 'list',
-    'post': 'create',    
-})
-ordering_detail = OrderingViewSet.as_view({'get': 'retrieve'})
+# service_list = ServiceViewSet.as_view({
+#     'get': 'list',
+#     'post': 'create',    
+# })
+# service_detail = ServiceViewSet.as_view({'get': 'retrieve'})
+# ordering_list = OrderingViewSet.as_view({
+#     'get': 'list',
+#     'post': 'create',    
+# })
+# ordering_detail = OrderingViewSet.as_view({'get': 'retrieve'})
 message_list = MessageViewSet.as_view({
     'get': 'list',
     'post': 'create',
@@ -52,10 +52,10 @@ urlpatterns = [
     path('customers/<int:pk>', customer_detail, name='customer-detail'),
     path('order/', order_list, name='order-list'),
     path('order/<int:pk>', order_detail, name='order-detail'),
-    path('service/', service_list, name='service-list'),
-    path('service/<int:pk>', service_detail, name='service-detail'),
-    path('ordering/', ordering_list, name='ordering-list'),
-    path('ordering/<int:pk>', ordering_detail, name='ordering-detail'),
+    # path('service/', service_list, name='service-list'),
+    # path('service/<int:pk>', service_detail, name='service-detail'),
+    # path('ordering/', ordering_list, name='ordering-list'),
+    # path('ordering/<int:pk>', ordering_detail, name='ordering-detail'),
     path('message/', message_list, name='message-list'),
     path('message/<int:pk>', message_detail, name='message-detail'),
 ]

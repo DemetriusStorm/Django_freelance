@@ -37,18 +37,18 @@ class OrderViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
-# Service Views
-class ServiceViewSet(viewsets.ModelViewSet):
-    queryset = Service.objects.all()
-    serializer_class = ServiceSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+# # Service Views
+# class ServiceViewSet(viewsets.ModelViewSet):
+#     queryset = Service.objects.all()
+#     serializer_class = ServiceSerializer
+#     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
-# Ordering Views
-class OrderingViewSet(viewsets.ModelViewSet):
-    queryset = Ordering.objects.all()
-    serializer_class = OrderingSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+# # Ordering Views
+# class OrderingViewSet(viewsets.ModelViewSet):
+#     queryset = Ordering.objects.all()
+#     serializer_class = OrderingSerializer
+#     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
 # Message Views
