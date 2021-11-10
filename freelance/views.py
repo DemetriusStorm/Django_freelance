@@ -3,8 +3,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.exceptions import PermissionDenied
 
-from .models import *
 from .serializer import *
+from .models import Executor, Customer
 
 
 class IsExecutor(permissions.BasePermission):
@@ -23,8 +23,8 @@ class ExecutorRetrieveView(generics.RetrieveAPIView):
     queryset = Executor.objects.all()
     serializer_class = ExecutorSerializer
 
+
 class ExecutorUpdateView(generics.UpdateAPIView):
-    # queryset = Executor.objects.all()
     serializer_class = CreateExecutorSerializer
     permission_classes = (IsExecutor,)
 
@@ -36,9 +36,11 @@ class ExecutorUpdateView(generics.UpdateAPIView):
 
         raise PermissionDenied()
 
+
 class ExecutorCreateView(generics.CreateAPIView):
     queryset = Executor.objects.all()
     serializer_class = CreateExecutorSerializer
+
 
 class ExecutorListView(generics.ListAPIView):
     queryset = Executor.objects.all()
