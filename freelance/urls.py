@@ -19,6 +19,30 @@ executor_detail = ExecutorViewSet.as_view({
 customer_list = CustomerViewSet.as_view({'get': 'list'})
 customer_detail = CustomerViewSet.as_view({'get': 'retrieve'})
 
+order_list = OrderViewSet.as_view({
+    'get': 'list',
+    'post': 'create',
+})
+order_detail = OrderViewSet.as_view({
+    'get': 'retrieve',
+    'put': 'update',
+})
+order_attachment_list = OrderAttachmentViewSet.as_view({
+    'get': 'retrieve',
+    'post': 'create',
+})
+order_attachment_detail = OrderAttachmentViewSet.as_view({
+    'get': 'retrieve',
+    'put': 'update',
+})
+order_customer_list = OrderCustomerViewSet.as_view({'get': 'list'})
+order_executor_list = OrderExecutorViewSet.as_view({'get': 'list'})
+order_responce_list = OrderResponceViewSet.as_view({
+    'get': 'retrieve',
+    'post': 'create',
+})
+
+
 urlpatterns = [
     path('auth/', include('djoser.urls')),
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
@@ -27,4 +51,9 @@ urlpatterns = [
     path('executors/<int:pk>', executor_detail, name='executor-detail'),
     path('customers/', customer_list, name='customer-list'),
     path('customers/<int:pk>', customer_detail, name='customer-detail'),
+    path('orders/', order_list, name='order-list'),
+    path('orders/<int:pk>', order_detail, name='order-detail'),
+    path('orders/executor/', order_executor_list, name='order-executor-list'),
+    path('orders/customer/', order_customer_list, name='order-customer-list'),
+    path('orders/responce/<int:pk>', order_responce_list, name='order-responce-detail'),
 ]

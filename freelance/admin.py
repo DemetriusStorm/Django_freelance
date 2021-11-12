@@ -4,3 +4,8 @@ from .models import *
 
 admin.site.register(Executor)
 admin.site.register(Customer)
+admin.site.register(Tag)
+admin.site.register(Order)
+admin.site.register(OrderTag)
+admin.site.register(OrderAttachment)
+admin.site.register(OrderResponce)
