@@ -79,3 +79,15 @@ class OrderResponceSerializer(serializers.ModelSerializer):
     class Meta:
         model = OrderResponce
         fields = '__all__'
+
+
+class OrderChatSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = OrderChat
+        fields = '__all__'
+
+
+class OrderChatMessageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = OrderChatMessage
+        fields = '__all__'
