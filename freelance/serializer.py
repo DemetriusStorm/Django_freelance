@@ -3,7 +3,6 @@ from .models import *
 from django.contrib.auth.models import User
 
 
-
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -28,7 +27,7 @@ class CreateExecutorSerializer(serializers.ModelSerializer):
 
 class CustomerSerializer(serializers.ModelSerializer):
     user = UserSerializer()
-    
+
     class Meta:
         model = Customer
         fields = '__all__'
@@ -37,4 +36,46 @@ class CustomerSerializer(serializers.ModelSerializer):
 class CreateCustomerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Customer
+        fields = '__all__'
+
+
+class TagSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tag
+        fields = ('id', 'tag')
+
+
+class OrderTagSerializer(serializers.ModelSerializer):
+    tag = TagSerializer()
+
+    class Meta:
+        model = OrderTag
+        fields = ('tag')
+
+
+class OrderAttachmentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = OrderAttachment
+        fields = '__all__'
+
+
+class OrderSerializer(serializers.ModelSerializer):
+    attachments = OrderAttachmentSerializer(many=True)
+
+    class Meta:
+        model = Order
+        fields = '__all__'
+
+
+class OrderCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Order
+        fields = '__all__'
+
+
+class OrderResponceSerializer(serializers.ModelSerializer):
+    executor = ExecutorSerializer()
+
+    class Meta:
+        model = OrderResponce
         fields = '__all__'
