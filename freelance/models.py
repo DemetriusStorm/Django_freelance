@@ -148,7 +148,7 @@ class OrderChatMessage(models.Model):
         on_delete=models.CASCADE,
     )
     message = models.TextField()
-    sender = models.ForeignKey(User, related_name='order_chat_sender')
+    sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='order_chat_sender')
     is_read = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
 
