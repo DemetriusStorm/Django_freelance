@@ -1,4 +1,4 @@
-from rest_framework import viewsets, permissions, status
+from rest_framework import viewsets, permissions, status, generics
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
@@ -24,6 +24,8 @@ class ExecutorViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAdminUser,)
 
 # Customer View
+
+
 class CustomerViewSet(viewsets.ModelViewSet):
     queryset = Customer.objects.all()
     serializer_class = CustomerSerializer
@@ -35,6 +37,13 @@ class OrderViewSet(viewsets.ModelViewSet):
     queryset = OrderTag.objects.all()
     serializer_class = OrderSerializer
     permission_classes = (permissions.IsAuthenticated,)
+
+
+# Tag View
+class TagViewSet(viewsets.ModelViewSet):
+    queryset = Tag.objects.all()
+    serializer_class = TagSerializer
+    permission_classes = (permissions.IsAdminUser,)
 
 
 # Order attach View
@@ -55,11 +64,25 @@ class OrderCustomerViewSet(viewsets.ModelViewSet):
 class OrderExecutorViewSet(viewsets.ModelViewSet):
     queryset = OrderResponce.objects.all()
     serializer_class = OrderSerializer
-    permission_classes = (permissions.IsAuthenticated,)    
+    permission_classes = (permissions.IsAuthenticated,)
 
 
 # Order responce View
 class OrderResponceViewSet(viewsets.ModelViewSet):
     queryset = OrderResponce.objects.all()
     serializer_class = OrderResponceSerializer
+    permission_classes = (permissions.IsAuthenticated,)
+
+
+# Order chat View
+class OrderChatViewSet(viewsets.ModelViewSet):
+    queryset = OrderChat.objects.all()
+    serializer_class = OrderChatSerializer
+    permission_classes = (permissions.IsAuthenticated,)
+
+
+# Order chat message View
+class OrderChatMessageViewSet(viewsets.ModelViewSet):
+    queryset = OrderChatMessage.objects.all()
+    serializer_class = OrderChatMessageSerializer
     permission_classes = (permissions.IsAuthenticated,)
