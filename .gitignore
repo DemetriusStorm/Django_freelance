@@ -131,9 +131,12 @@ dmypy.json
 # Text backup files
 *.bak
 
-#Database
+# Database
 *.sqlite3
 
-#IDEs
+# IDEs
 .vscode/
 .idea/
+
+# Test FW
+.pytest_cache

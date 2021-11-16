@@ -52,8 +52,9 @@ order_chat_messages_list = OrderChatMessageViewSet.as_view({
 })
 order_chat_detail = OrderChatViewSet.as_view({'get': 'retrieve'})
 
+app_name = 'freelance'
 urlpatterns = [
-    path('auth/', include('djoser.urls')),
+    # path('auth/', include('djoser.urls'), name='current_user'),
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('executors/', executor_list, name='executor-list'),

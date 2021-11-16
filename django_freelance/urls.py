@@ -20,7 +20,7 @@ from django.views.generic import TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('freelance.urls')),
+    path('api/', include('freelance.urls', namespace='freelance')),
     path('swagger-ui/', TemplateView.as_view(
         template_name='django_freelance/swagger-ui.html',
         extra_context={'schema_url': 'openapi-schema'}

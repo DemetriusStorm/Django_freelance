@@ -100,9 +100,6 @@ class OrderAttachment(models.Model):
     )
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     filename = models.TextField()
-    # sha1 hash
-    hash = models.CharField(max_length=40)
-    # max url length is 2000
     url = models.CharField(max_length=2000)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
