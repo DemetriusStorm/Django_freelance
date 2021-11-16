@@ -3,3 +3,6 @@ migrate:
 
 run:
 	python manage.py runserver
+
+test:
+	pytest -vv
