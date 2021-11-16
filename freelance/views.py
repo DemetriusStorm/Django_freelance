@@ -1,6 +1,8 @@
 from rest_framework import viewsets, permissions, status, generics
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.exceptions import PermissionDenied
+
 
 from .models import *
 from .serializer import *
@@ -21,15 +23,14 @@ class LogOut(APIView):
 class ExecutorViewSet(viewsets.ModelViewSet):
     queryset = Executor.objects.all()
     serializer_class = ExecutorSerializer
-    permission_classes = (permissions.IsAdminUser,)
+    permission_classes = (permissions.IsAuthenticated,)
+
 
 # Customer View
-
-
 class CustomerViewSet(viewsets.ModelViewSet):
     queryset = Customer.objects.all()
     serializer_class = CustomerSerializer
-    permission_classes = (permissions.IsAdminUser,)
+    permission_classes = (permissions.IsAuthenticated,)
 
 
 # Order View
@@ -43,7 +44,7 @@ class OrderViewSet(viewsets.ModelViewSet):
 class TagViewSet(viewsets.ModelViewSet):
     queryset = Tag.objects.all()
     serializer_class = TagSerializer
-    permission_classes = (permissions.IsAdminUser,)
+    permission_classes = (permissions.IsAuthenticated,)
 
 
 # Order attach View
