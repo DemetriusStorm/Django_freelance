@@ -60,7 +60,7 @@ class OrderAttachmentSerializer(serializers.ModelSerializer):
 
 
 class OrderSerializer(serializers.ModelSerializer):
-    attachments = OrderAttachmentSerializer(many=True)
+    # attachments = OrderAttachmentSerializer(many=True)
 
     class Meta:
         model = Order
