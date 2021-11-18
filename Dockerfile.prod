@@ -1,0 +1,64 @@
+###########
+# BUILDER #
+###########
+
+# pull official base image
+FROM python:3.9.6-alpine AS builder
+
+# set work directory
+WORKDIR D:\\Projects\\_GIT\\_public\\Django_freelance
+
+# set environment variables
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+# install psycopg2 dependencies
+RUN apk update \
+    && apk add postgresql-dev gcc python3-dev musl-dev
+
+# lint
+RUN pip install --upgrade pip
+# RUN pip install flake8==3.9.2
+COPY . .
+# RUN flake8 --ignore=E501,F401 .
+
+# install dependencies
+# create directory for src
+RUN mkdir -p /usr/src/django_freelance/wheels
+COPY requirements.txt /usr/src/django_freelance
+RUN pip wheel --no-cache-dir --no-deps --wheel-dir /usr/src/django_freelance/wheels -r requirements.txt
+
+#########
+# FINAL #
+#########
+
+# pull official base image
+FROM python:3.9.6-alpine
+
+# create directory for the django_freelance user
+RUN mkdir -p /home/django_freelance
+
+# create the django_freelance user
+RUN addgroup -S django_freelance && adduser -S django_freelance -G django_freelance
+
+# create the appropriate directories
+ENV HOME=/home/django_freelance
+ENV DJANGO_FREELANCE_HOME=/home/django_freelance/web
+RUN mkdir $DJANGO_FREELANCE_HOME
+RUN mkdir $DJANGO_FREELANCE_HOME/staticfiles
+WORKDIR $DJANGO_FREELANCE_HOME
+
+# install dependencies
+RUN apk update && apk add libpq
+COPY --from=builder /usr/src/django_freelance/wheels /wheels
+COPY --from=builder /usr/src/django_freelance/requirements.txt .
+RUN pip install --no-cache /wheels/*
+
+# copy project
+COPY . $DJANGO_FREELANCE_HOME
+
+# chown all the files to the django_freelance user
+RUN chown -R django_freelance:django_freelance $DJANGO_FREELANCE_HOME
+
+# change to the django_freelance user
+USER django_freelance
