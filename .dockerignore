@@ -1,0 +1,11 @@
+venv
+?env?
+.idea
+.vscode
+.pytest?
+*/__pycache__*
+*/*/__pycache__*
+?pyc
+*.sh
+docker-compose.yml
+Dockerfile
